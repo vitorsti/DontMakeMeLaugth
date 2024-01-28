@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://de5uoyuqwik06"]
+
+[ext_resource type="PackedScene" uid="uid://b5acfobp7qinp" path="res://art/player.glb" id="1_gbb2w"]
+[ext_resource type="Script" path="res://VitorPlayerController.gd" id="1_lmoho"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8mkye"]
+radius = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ndel"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_lmoho")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="player" parent="Pivot" instance=ExtResource("1_gbb2w")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.807387, 0)
+shape = SubResource("SphereShape3D_8mkye")
+
+[node name="PlayerArea" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea"]
+shape = SubResource("BoxShape3D_0ndel")

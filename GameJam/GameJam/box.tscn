@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpbm34tthlog2"]
+
+[ext_resource type="Script" path="res://TriggerEnter.gd" id="1_r6ldb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x2ur1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_olr7s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p0wod"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_atqd4"]
+
+[node name="Box" type="Node3D"]
+
+[node name="BoxCollision" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_x2ur1")
+
+[node name="w" type="CollisionShape3D" parent="BoxCollision"]
+shape = SubResource("BoxShape3D_olr7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoxCollision"]
+mesh = SubResource("BoxMesh_p0wod")
+skeleton = NodePath("../..")
+
+[node name="BoxArea" type="Area3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.5, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_r6ldb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoxArea"]
+shape = SubResource("BoxShape3D_atqd4")
+
+[connection signal="area_entered" from="BoxArea" to="BoxArea" method="_on_area_entered"]
+[connection signal="body_entered" from="BoxArea" to="BoxArea" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="BoxArea" to="BoxArea" method="_on_body_shape_entered"]
