@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://y8xif21mxqmj"]
+
+[ext_resource type="PackedScene" uid="uid://baafy1c56wyqy" path="res://player.tscn" id="1_ghnhy"]
+[ext_resource type="PackedScene" uid="uid://8uxcyce84f26" path="res://TestObject.tscn" id="2_x8lpd"]
+[ext_resource type="PackedScene" uid="uid://b06hpophe068q" path="res://risometro.tscn" id="3_vsi1d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qtnpq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_58e22"]
+sky_material = SubResource("ProceduralSkyMaterial_qtnpq")
+
+[sub_resource type="Environment" id="Environment_6ntyh"]
+background_mode = 2
+sky = SubResource("Sky_58e22")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1nfvc"]
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bcam0"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6ntyh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_1nfvc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_bcam0")
+
+[node name="Player" parent="." instance=ExtResource("1_ghnhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38199, -1.46444)
+linear_damp = 3.0
+
+[node name="Object" parent="." instance=ExtResource("2_x8lpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.60287)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(0.642788, -0.286965, 0.710264, 0, 0.927184, 0.374607, -0.766044, -0.240792, 0.595982, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+projection = 1
+size = 6.922
+
+[node name="Risometro" parent="Marker3D/Camera3D" instance=ExtResource("3_vsi1d")]
+transform = Transform3D(0.685, 0, 0, 0, 0.685, -1.1977e-07, 0, 1.1977e-07, 0.685, -4.58, -2.775, -0.115)
+downvalue = 0.001

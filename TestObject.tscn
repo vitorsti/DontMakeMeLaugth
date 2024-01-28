@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://8uxcyce84f26"]
+
+[ext_resource type="Script" path="res://ReceiveCollision.gd" id="1_t6l0l"]
+[ext_resource type="PackedScene" uid="uid://choa6luisw0xy" path="res://hurt_box.tscn" id="2_hkwcx"]
+[ext_resource type="PackedScene" uid="uid://dttm7fkbgp0vl" path="res://hit_box.tscn" id="3_j0y5m"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3xj6i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ikh7o"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k0p38"]
+radius = 1.29969
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mttsw"]
+
+[node name="Object" type="RigidBody3D"]
+script = ExtResource("1_t6l0l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_3xj6i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_ikh7o")
+
+[node name="HurtBox" parent="." instance=ExtResource("2_hkwcx")]
+collision_layer = 8
+
+[node name="CollisionShape3D" parent="HurtBox" index="0"]
+shape = SubResource("CylinderShape3D_k0p38")
+
+[node name="hit_box" parent="." instance=ExtResource("3_j0y5m")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" parent="hit_box" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("CylinderShape3D_mttsw")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="HurtBox"]
+[editable path="hit_box"]

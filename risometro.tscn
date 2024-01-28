@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b06hpophe068q"]
+
+[ext_resource type="Texture2D" uid="uid://b7c6dgpp0ysgv" path="res://UI_Risometro_1.png" id="1_pbmko"]
+[ext_resource type="Script" path="res://Risometro.gd" id="2_nppdj"]
+[ext_resource type="Texture2D" uid="uid://drhvbo7g00tn4" path="res://UI_Risometro_2.png" id="3_7vj4d"]
+
+[node name="Risometro" type="Sprite3D"]
+transform = Transform3D(0.685, 0, 0, 0, 0.685, -1.1977e-07, 0, 1.1977e-07, 0.685, 0, 0.431151, 7.5385e-08)
+texture = ExtResource("1_pbmko")
+script = ExtResource("2_nppdj")
+downvalue = null
+
+[node name="PointerFather" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0250018, -0.340049, 0)
+
+[node name="Pointer" type="Sprite3D" parent="PointerFather"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0250018, 0.340049, 0)
+sorting_offset = 1.0
+offset = Vector2(-34.515, 30.67)
+texture = ExtResource("3_7vj4d")

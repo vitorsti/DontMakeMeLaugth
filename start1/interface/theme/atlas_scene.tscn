@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://djh68c3nqgecl"]
+
+[ext_resource type="Script" path="res://addons/sprite_cutter/AtlasScene.gd" id="1_1evyq"]
+[ext_resource type="Texture2D" uid="uid://khsvvqqi1vdo" path="res://UI_Risometro.png" id="2_oloap"]
+
+[node name="AtlasScene" type="Node"]
+script = ExtResource("1_1evyq")
+
+[node name="UiRisometro" type="Sprite2D" parent="."]
+position = Vector2(104, 120)
+texture = ExtResource("2_oloap")
+region_enabled = true
